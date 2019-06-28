@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { withAuthenticator } from 'aws-amplify-react';
 import logo from './logo.svg';
 import './App.css';
+import config from './config';
 
 class App extends Component {
   render() {
@@ -20,6 +21,7 @@ class App extends Component {
           >
             Learn React
           </a>
+          <div>config.get: {config.get('TODD')}</div>
         </header>
       </div>
     );
@@ -45,4 +47,4 @@ const signUpConfig = {
     custom: false
   }]
 };
-export default withAuthenticator(App, { signUpConfig });
+export default App; // withAuthenticator(App, { signUpConfig });
