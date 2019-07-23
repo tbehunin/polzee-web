@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Amplify from 'aws-amplify';
+import Amplify, { Auth } from 'aws-amplify';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
@@ -13,6 +13,15 @@ Amplify.configure({
         userPoolId: config.get('AMPLIFYAUTH_USERPOOLID'),
         userPoolWebClientId: config.get('AMPLIFYAUTH_USERPOOLCLIENTID'),
         mandatorySignIn: false,
+    },
+    API: {
+        endpoints: [{
+            name: 'generateToken',
+            endpoint: 'https://dm1e9uzf2d.execute-api.us-west-2.amazonaws.com/dev/generateToken',
+            service: 'lambda',
+            region: 'us-west-2',
+            custom_header: async () => ({ Authorization: `Bearer ${(await Auth.currentSession()).idToken.jwtToken}` })
+        }]
     }
 });
 

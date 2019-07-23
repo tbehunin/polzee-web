@@ -3,8 +3,14 @@ import { withAuthenticator } from 'aws-amplify-react';
 import logo from './logo.svg';
 import './App.css';
 import config from './config';
+import { API } from 'aws-amplify';
 
 class App extends Component {
+  componentDidMount = () => {
+    API.get('generateToken', '').then(resp => {
+      console.log('resp', resp);
+    });
+  }
   render() {
     return (
       <div className="App">
@@ -47,4 +53,4 @@ const signUpConfig = {
     custom: false
   }]
 };
-export default App; // withAuthenticator(App, { signUpConfig });
+export default withAuthenticator(App, { signUpConfig });
