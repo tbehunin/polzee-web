@@ -13,7 +13,16 @@ Amplify.configure({
         userPoolId: config.get('AMPLIFYAUTH_USERPOOLID'),
         userPoolWebClientId: config.get('AMPLIFYAUTH_USERPOOLCLIENTID'),
         mandatorySignIn: false,
-    }
+    },
+    API: {
+        endpoints: [{
+            name: 'polzeeApi',
+            endpoint: config.get('AMPLIFYAPI_POLZEEAPIENDPOINT'),
+            custom_header: async () => { 
+                return { Authorization: `Bearer ${(await Amplify.Auth.currentSession()).getIdToken().getJwtToken()}` }
+            }
+        }],
+    },
 });
 
 ReactDOM.render(<App />, document.getElementById('root'));
