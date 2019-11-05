@@ -3,6 +3,7 @@ import AuthRoot from './AuthRoot';
 import logo from './logo.svg';
 import './App.css';
 import config from './config';
+import FetchDataButton from './FetchDataButton';
 
 class App extends Component {
   render() {
@@ -23,6 +24,7 @@ class App extends Component {
           </a>
           <div>config.get: {config.get('TODD')}</div>
           <AuthRoot />
+          <FetchDataButton />
         </header>
       </div>
     );
